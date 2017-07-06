@@ -25,3 +25,11 @@ SA2_2011_centroids <-
   select(SA2_MAIN11, SA2_NAME11, lon = x, lat = y)
 
 use_data(SA2_2011_centroids)
+
+setwd("~/../Downloads/1270055001_sa2_2016_aust_shape")
+
+SA2_2016 <- readOGR(".", layer = "SA2_2016_AUST")
+devtools::use_data(SA2_2016)
+
+SA_decoder <- fread("~/../Downloads/1270055001_sa2_2016_aust_shape/SA2_decoder.csv")
+devtools::use_data(SA_decoder)

@@ -1,13 +1,17 @@
 Package: ASGS
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Title: Lazily Load Australian Statistical Geography Shapefiles
+Version: 0.1.0
 Authors@R: person("Hugh", "Parsonage", email = "hugh.parsonage+ASGS@gmail.com", role = c("aut", "cre"))
-Description: Provides statistical geography files.
-Depends: R (>= 3.3.3)
-License: What license is it under?
+Description: Provides statistical geography files, including simplified and quantized shapefiles suitable for interactive maps.
 Depends:
   rgdal,
   data.table
+Imports:
+  sp,
+  spdep,
+  dplyr
+License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+Suggests: testthat

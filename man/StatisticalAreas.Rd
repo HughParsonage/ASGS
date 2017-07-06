@@ -4,11 +4,14 @@
 \name{SA1}
 \alias{SA1}
 \alias{SA2_2011}
+\alias{SA2_2016}
 \alias{SA1_2011}
 \title{SA2}
 \format{An object of class \code{SpatialPolygonsDataFrame} with 2196 rows and 12 columns.}
 \usage{
 SA2_2011
+
+SA2_2016
 
 SA1_2011
 }
