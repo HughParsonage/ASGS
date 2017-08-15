@@ -12,6 +12,7 @@ vignette: >
 ```{r loadGrattanCharts}
 library(grattanCharts)
 ```
+
 ```{r loadPackages}
 library(data.table)
 library(leaflet)
