@@ -1,0 +1,54 @@
+---
+title: "Using leaflet"
+author: "Hugh Parsonage"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r loadGrattanCharts}
+library(grattanCharts)
+```
+```{r loadPackages}
+library(data.table)
+library(leaflet)
+library(hutils)
+library(ASGS)
+```
+
+
+```{r summarize-data}
+SA2_2011_decoder <- SA2_2011@data %>% as.data.table
+
+Repayment_stress_by_SA2_2011 <- 
+  fread("~/Data/ABS/Mortgage-payment-stress-2011.csv", na.strings = "--") %>% 
+  .[`Mortgage monthly repayments` == "Households where mortgage payments are 30%, or greater, of household income"] %>% 
+  setorderv("%") %>% 
+  setnames("%", "Prop_geq_30pc") %>%
+  drop_col("SA2_MAIN11") %>%
+  .[SA2_2011_decoder, on = c("Suburb==SA2_NAME11")] %>%
+  .[, .(SA2_MAIN11, Prop_geq_30pc)] %>%
+  .[, Prop_geq_30pc := as.numeric(Prop_geq_30pc)] %>%
+  .[, SA2_MAIN11 := as.character(SA2_MAIN11)] %>%
+  .[SA2_2011_decoder, on = "SA2_MAIN11"]
+
+pal_v <- colorNumeric(palette = grattanCharts::gpal(7, reverse = TRUE),
+                      domain = range(Repayment_stress_by_SA2_2011$Prop_geq_30pc, na.rm = TRUE))
+```
+
+```{r prepare-for-grattan_leaflet}
+Repayment_stress_by_SA2_2011[, fillColor := pal_v(Prop_geq_30pc)]
+Repayment_stress_by_SA2_2011[, labelTitle := SA2_NAME11]
+Repayment_stress_by_SA2_2011[, labelText := paste0(Prop_geq_30pc, "%")]
+```
+
+```{r draw-leaflet-chart, fig.width=11, fig.height=11}
+grattan_leaflet(Repayment_stress_by_SA2_2011, "2011") %>%
+  addLegend(pal = pal_v,
+            opacity = 1,
+            values = ~unique(Repayment_stress_by_SA2_2011$Prop_geq_30pc),
+            title = "Percentage point change\nmortgage stress")
+```
