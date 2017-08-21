@@ -25,7 +25,7 @@ library(ASGS)
 SA2_2011_decoder <- SA2_2011@data %>% as.data.table
 
 Repayment_stress_by_SA2_2011 <- 
-  fread("~/Data/ABS/Mortgage-payment-stress-2011.csv", na.strings = "--") %>% 
+  fread("https://raw.githubusercontent.com/HughParsonage/ABS-data/master/Mortgage-payment-stress-2011.csv", na.strings = "--") %>% 
   .[`Mortgage monthly repayments` == "Households where mortgage payments are 30%, or greater, of household income"] %>% 
   setorderv("%") %>% 
   setnames("%", "Prop_geq_30pc") %>%
