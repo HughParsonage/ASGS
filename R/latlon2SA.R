@@ -2,41 +2,39 @@
 #' 
 #' @param lat,lon The latitude and longitude of the points.
 #' @param to Which statistical areas (by default SA2) to map to.
-#' @param return Return the spatial data frame or a vector?
+#' @param yr The year of the statistical area series.
+#' @param return Return the spatial data frame (\code{sp}) or a vector (\code{v}) of the ?
+#' @param NAME If \code{TRUE} and return is \code{v}, the default, the \code{NAME} is returned; otherwise, the \code{MAIN} or \code{CODE} is returned.
+#' If \code{to = SA1} then, as \code{NAME} is not available, the \code{MAIN} is returned without a warning.
 #' @return A vector of the SAs mapped.
 #' @export
 
 
-latlon2SA <- function(lat, lon, to = c("SA2", "SA1", "SA3", "SA4"), return = c("sp", "v")) {
+latlon2SA <- function(lat,
+                      lon, 
+                      to = c("SA2", "SA1", "SA3", "SA4"),
+                      yr = c("2016", "2011"),
+                      return = c("sp", "v"),
+                      NAME = TRUE) {
   # Could use NSE but can't be arsed:
   to <- match.arg(to)
+  yr <- match.arg(yr)
   return <- match.arg(return)
-  switch(to,
-         "SA2" = {
-           points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
-                                       proj4string = SA2_2011@proj4string)
-           out <- sp::over(points, SA2_2011)
-         }, 
-         
-         "SA1" = {
-           points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
-                                       proj4string = SA1_2011@proj4string)
-           out <- sp::over(points, SA1_2011)
-         },
-         
-         "SA3" = {
-           points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
-                                       proj4string = SA3_2011@proj4string)
-           out <- sp::over(points, SA3_2011)
-         },
-         
-         "SA4" = {
-           points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
-                                       proj4string = SA4_2011@proj4string)
-           out <- sp::over(points, SA4_2011)
-         })
+  
+  shapefile <- get(paste0(to, "_", yr))
+  points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
+                              proj4string = shapefile@proj4string)
+  out <- sp::over(points, shapefile)
+
   if (return == "v") {
-    out <- out[[paste0(to, "_NAME11")]]
+    if (NAME && to != "SA1") {
+      suffix <- paste0("NAME", yr %% 2000)
+      v_name <- paste0(to, "_", suffix)
+    } else {
+      suffix <- names(out)[grepl(to, names(out)) & !grepl("NAME", names(out))]
+      v_name <- suffix[1]
+    }
+    out <- out[[v_name]]
   }
   out
 }

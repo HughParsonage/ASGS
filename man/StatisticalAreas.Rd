@@ -3,17 +3,26 @@
 \docType{data}
 \name{SA1}
 \alias{SA1}
-\alias{SA2_2011}
-\alias{SA2_2016}
 \alias{SA1_2011}
+\alias{SA2_2011}
+\alias{SA1_2016}
+\alias{SA2_2016}
+\alias{SA3_2016}
+\alias{SA4_2016}
 \title{SA2}
-\format{An object of class \code{SpatialPolygonsDataFrame} with 2196 rows and 12 columns.}
+\format{An object of class \code{SpatialPolygonsDataFrame} with 54772 rows and 14 columns.}
 \usage{
+SA1_2011
+
 SA2_2011
+
+SA1_2016
 
 SA2_2016
 
-SA1_2011
+SA3_2016
+
+SA4_2016
 }
 \description{
 ESRI shape files.

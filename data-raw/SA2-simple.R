@@ -6,6 +6,12 @@ library(data.table)
 library(magrittr)
 library(geojsonio)
 
+setwd("~/../Downloads")
+# mapshaper -o precision=0.0001 format=topojson 
+# 326.1 Mb -> 309.7 Mb (i.e. not worth it)
+# SA1_2016_simple <- geojsonio::geojson_read("SA1-simple0001.json", what = "sp")
+# setwd("~/ASGS")
+
 setwd("~/../Downloads/mapshaper/")
 SA2_2011_simple <- geojsonio::geojson_read("SA2.json", what = "sp")
 

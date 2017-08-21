@@ -6,10 +6,20 @@
 NULL
 
 #' @rdname StatisticalAreas
+"SA1_2011"
+
+#' @rdname StatisticalAreas
 "SA2_2011"
+
+
+#' @rdname StatisticalAreas
+"SA1_2016"
 
 #' @rdname StatisticalAreas
 "SA2_2016"
 
 #' @rdname StatisticalAreas
-"SA1_2011"
+"SA3_2016"
+
+#' @rdname StatisticalAreas
+"SA4_2016"

@@ -66,9 +66,9 @@ grattan_leaflet <- function(DT, Year = c("2011", "2016")) {
   shapefile %>%
     leaflet %>%
     addPolygons(stroke = TRUE,
-                opacity = 1,
-                weight = 1,  # the border thickness / pixels
-                color = "black",
+                opacity = 0.5,
+                weight = 0.75,  # the border thickness / pixels
+                color = theGrey,
                 fillColor = shapefile@data[["fillColor"]], 
                 fillOpacity = 1,
                 label = lapply(paste0("<b>", 

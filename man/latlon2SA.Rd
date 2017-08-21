@@ -4,15 +4,20 @@
 \alias{latlon2SA}
 \title{Decode coordinates to Statistical Areas}
 \usage{
-latlon2SA(lat, lon, to = c("SA2", "SA1", "SA3", "SA4"), return = c("sp",
-  "v"))
+latlon2SA(lat, lon, to = c("SA2", "SA1", "SA3", "SA4"), yr = c("2016",
+  "2011"), return = c("sp", "v"), NAME = TRUE)
 }
 \arguments{
 \item{lat, lon}{The latitude and longitude of the points.}
 
 \item{to}{Which statistical areas (by default SA2) to map to.}
 
-\item{return}{Return the spatial data frame or a vector?}
+\item{yr}{The year of the statistical area series.}
+
+\item{return}{Return the spatial data frame (\code{sp}) or a vector (\code{v}) of the ?}
+
+\item{NAME}{If \code{TRUE} and return is \code{v}, the default, the \code{NAME} is returned; otherwise, the \code{MAIN} or \code{CODE} is returned.
+If \code{to = SA1} then, as \code{NAME} is not available, the \code{MAIN} is returned without a warning.}
 }
 \value{
 A vector of the SAs mapped.
