@@ -53,3 +53,5 @@ grattan_leaflet(Repayment_stress_by_SA2_2011, "2011") %>%
             values = ~unique(Repayment_stress_by_SA2_2011$Prop_geq_30pc),
             title = "Percentage point change\nmortgage stress")
 ```
+
+

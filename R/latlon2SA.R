@@ -28,7 +28,7 @@ latlon2SA <- function(lat,
 
   if (return == "v") {
     if (NAME && to != "SA1") {
-      suffix <- paste0("NAME", yr %% 2000)
+      suffix <- paste0("NAME", substr(yr, 3, 4))
       v_name <- paste0(to, "_", suffix)
     } else {
       suffix <- names(out)[grepl(to, names(out)) & !grepl("NAME", names(out))]

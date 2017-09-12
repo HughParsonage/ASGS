@@ -3,14 +3,33 @@
 #' Other required names are \code{fillColor}, \code{labelTitle}, and \code{labelText}.
 #' @param Year The year to which \code{DT} applies.
 #' @return A \code{leaflet} object; a map of Australia.
-#' @export
+#' 
+#' @examples 
+#' \dontrun{
+#' library(readxl)
+#' library(data.table)
+#' library(magrittr)
+#' library(grattanCharts)
+#' 
+#' DT <- 
+#'   read_excel("inst/extdata/unemp.xlsx") %>%
+#'   setDT %>%
+#'   .[, .(SA2_NAME11 = `Statistical Area Level 2 (SA2)`,
+#'         fillColor = gpal(7)[Breaks], 
+#'         labelText = `Statistical Area Level 2 (SA2)`,
+#'         labelTitle = "Unemployment")]
+#'         
+#' grattan_leaflet(DT, Year = "2011")
+#' }
+#' 
 #' @importFrom leaflet leaflet
 #' @importFrom leaflet addPolygons
 #' @importFrom htmltools HTML
 #' @importFrom magrittr %>%
+#' 
 #' @export
 
-grattan_leaflet <- function(DT, Year = c("2011", "2016")) {
+grattan_leaflet <- function(DT, Year = c("2011", "2016"), na.value = grattanCharts::theGrey) {
   noms <- names(DT)
   nom1 <- noms[1]
   
@@ -58,10 +77,16 @@ grattan_leaflet <- function(DT, Year = c("2011", "2016")) {
   data_slot_key <- 
     grep(paste0(asgs, ".*", CodeOrName), names(data_slot), value = TRUE)[1]
   
-  slot(shapefile, "data") <- merge(data_slot, 
-                                   DT,
-                                   by.x = data_slot_key,
-                                   by.y = nom1)
+  slot(shapefile, "data") <- 
+    merge(data_slot, 
+          DT,
+          by.x = data_slot_key,
+          by.y = nom1, 
+          all.x = TRUE) %>%
+    as.data.table %>%
+    setorderv(grep(paste0(asgs, ".*", "MAIN|CODE"), names(.), value = TRUE)[1]) %>%
+    .[is.na(fillColor), fillColor := na.value] %>%
+    .[]
   
   shapefile %>%
     leaflet %>%
