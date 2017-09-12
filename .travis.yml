@@ -1,0 +1,4 @@
+language: r
+
+script: 
+ - Rscript -e "download.file(url = "https://dl.dropbox.com/s/zmggqb1wmmv7mqe/ASGS_0.4.0.tar.gz", destfile = tempfile())"
