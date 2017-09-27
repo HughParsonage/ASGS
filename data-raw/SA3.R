@@ -14,3 +14,16 @@ setwd("~/../Downloads/1270055001_sa4_2016_aust_shape/")
 SA4_2016 <- readOGR(dsn = ".", layer = "SA4_2016_AUST")
 
 devtools::use_data(SA4_2016)
+
+
+setwd("~/../Downloads/1270055001_sa3_2011_aust_shape")
+SA3_2011 <- readOGR(dsn = ".", layer = "SA3_2011_AUST")
+
+setwd("~/ASGS")
+devtools::use_data(SA3_2011)
+
+setwd("~/../Downloads/1270055001_sa4_2011_aust_shape")
+SA4_2011 <- readOGR(dsn = ".", layer = "SA4_2011_AUST")
+
+setwd("~/ASGS")
+devtools::use_data(SA4_2011)

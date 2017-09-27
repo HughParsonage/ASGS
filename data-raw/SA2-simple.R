@@ -32,3 +32,7 @@ SA3_2016_simple <- geojson_read("./data-raw/mapshaper/SA3_2016_AUST.json",
                                 what = "sp")
 
 devtools::use_data(SA3_2016_simple)
+
+setwd("~/../Downloads/")
+SA3_2011_simple <- geojson_read("~/../Downloads/mapshaper/SA3_2011.json", what = "sp")
+devtools::use_data(SA3_2011_simple)

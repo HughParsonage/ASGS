@@ -4,17 +4,41 @@
 \alias{grattan_leaflet}
 \title{Draw leaflet charts in grattan style}
 \usage{
-grattan_leaflet(DT, Year = c("2011", "2016"))
+grattan_leaflet(DT, Year = c("2011", "2016"), simple = FALSE,
+  na.value = grattanCharts::theGrey)
 }
 \arguments{
 \item{DT}{A data frame whose first column is of the form \code{SA[1-4]_(CODE|NAME)(11|16)} as a key to join with ASGS shapefiles.
 Other required names are \code{fillColor}, \code{labelTitle}, and \code{labelText}.}
 
 \item{Year}{The year to which \code{DT} applies.}
+
+\item{simple}{Use a simplified shapefile (if available)?}
+
+\item{na.value}{\code{fillColor} to use for unmatched polygons.}
 }
 \value{
 A \code{leaflet} object; a map of Australia.
 }
 \description{
 Draw leaflet charts in grattan style
+}
+\examples{
+\dontrun{
+library(readxl)
+library(data.table)
+library(magrittr)
+library(grattanCharts)
+
+DT <- 
+  read_excel(system.file("extdata", "unemp.xlsx", package = "ASGS")) \%>\%
+  setDT \%>\%
+  .[, .(SA2_NAME11 = `Statistical Area Level 2 (SA2)`,
+        fillColor = gpal(7)[Breaks], 
+        labelText = `Statistical Area Level 2 (SA2)`,
+        labelTitle = "Unemployment")]
+        
+grattan_leaflet(DT, Year = "2011")
+}
+
 }

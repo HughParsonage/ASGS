@@ -11,6 +11,9 @@ NULL
 #' @rdname StatisticalAreas
 "SA2_2011"
 
+#' @rdname StatisticalAreas
+"SA3_2011"
+
 
 #' @rdname StatisticalAreas
 "SA1_2016"
