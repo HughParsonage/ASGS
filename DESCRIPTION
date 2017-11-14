@@ -4,6 +4,7 @@ Version: 0.4.0
 Authors@R: person("Hugh", "Parsonage", email = "hugh.parsonage+ASGS@gmail.com", role = c("aut", "cre"))
 Description: Provides statistical geography files, including simplified and quantized shapefiles suitable for interactive maps.
 Depends:
+  R (>= 2.10),
   rgdal,
   data.table
 Imports:
@@ -12,13 +13,15 @@ Imports:
   dplyr,
   leaflet,
   htmltools,
-  magrittr
-License: What license is it under?
+  magrittr,
+  methods
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: testthat,
     knitr,
     rmarkdown,
-    grattanCharts
+    grattanCharts,
+    hutils
 VignetteBuilder: knitr

@@ -16,7 +16,7 @@ smooth_shapefile(shapefile, data_by_id, id, var2smooth, k = 10,
 
 \item{var2smooth}{A length-one character vector indicating which variable in \code{data_by_id} to smooth.}
 
-\item{k}{Passed to \code{\link{spdep::knearneigh}}.}
+\item{k}{Passed to \code{\link[spdep]{knearneigh}}.}
 
 \item{coalesce.to}{A single value. If there are any missing values in \code{data_by_id[[id]]}, what should these be imputed as? Must
 have the same storage mode as \code{data_by_id[[id]]}.}

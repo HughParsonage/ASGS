@@ -1,7 +1,7 @@
 #' @title SA2
 #' @name SA1
 #' @rdname StatisticalAreas
-#' @description ESRI shape files.
+#' @description ESRI shape files for statistical areas and destination zones. 
 #' 
 NULL
 
@@ -26,3 +26,12 @@ NULL
 
 #' @rdname StatisticalAreas
 "SA4_2016"
+
+#' @rdname StatisticalAreas
+"SA4_2011"
+
+#' @rdname StatisticalAreas
+"DZN_2011"
+
+#' @rdname StatisticalAreas
+"DZN_2016"

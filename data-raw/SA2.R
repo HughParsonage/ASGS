@@ -122,4 +122,8 @@ DZN_2011 <- readOGR(".", layer = "DZN_2011_AUST")
 setwd("~/ASGS")
 devtools::use_data(DZN_2011)
 
+setwd("data-raw/80000_dzn_2016_aust_shape/")
+DZN_2016 <- readOGR(".", layer = "DZN_2016_AUST")
+setwd("~/ASGS")
+devtools::use_data(DZN_2016)
 

@@ -5,7 +5,7 @@
 \title{Draw leaflet charts in grattan style}
 \usage{
 grattan_leaflet(DT, Year = c("2011", "2016"), simple = FALSE,
-  na.value = grattanCharts::theGrey)
+  na.value = "#6A737B")
 }
 \arguments{
 \item{DT}{A data frame whose first column is of the form \code{SA[1-4]_(CODE|NAME)(11|16)} as a key to join with ASGS shapefiles.
@@ -40,5 +40,6 @@ DT <-
         
 grattan_leaflet(DT, Year = "2011")
 }
+
 
 }

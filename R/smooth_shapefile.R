@@ -5,7 +5,7 @@
 #' @param data_by_id A \code{data.frame} containing a value for each polygon within \code{shapefile}.
 #' @param id The key of \code{data_by_id} on which the shapefile may be merged with \code{shapefile}.
 #' @param var2smooth A length-one character vector indicating which variable in \code{data_by_id} to smooth.
-#' @param k Passed to \code{\link{spdep::knearneigh}}. 
+#' @param k Passed to \code{\link[spdep]{knearneigh}}. 
 #' @param coalesce.to A single value. If there are any missing values in \code{data_by_id[[id]]}, what should these be imputed as? Must
 #' have the same storage mode as \code{data_by_id[[id]]}.
 #' 

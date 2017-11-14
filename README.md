@@ -16,6 +16,9 @@ I've tested the above, but only using my computer. Please file an issue if you'r
 
 ## NEWS
 
+### 2017-11-13
+- Add 2006 CD centroids
+
 ### 2017-08-21
 - Add POA, LGA, DZN_2011 files
 

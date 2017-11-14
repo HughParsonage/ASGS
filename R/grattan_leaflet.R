@@ -24,17 +24,16 @@
 #' grattan_leaflet(DT, Year = "2011")
 #' }
 #' 
-#' @importFrom leaflet leaflet
-#' @importFrom leaflet addPolygons
-#' @importFrom htmltools HTML
-#' @importFrom magrittr %>%
 #' 
 #' @export
 
-grattan_leaflet <- function(DT, Year = c("2011", "2016"), simple = FALSE, na.value = grattanCharts::theGrey) {
+grattan_leaflet <- function(DT,
+                            Year = c("2011", "2016"),
+                            simple = FALSE,
+                            na.value = "#6A737B") {
   noms <- names(DT)
   nom1 <- noms[1]
-  
+  fillColor <- labelTitle <- labelText <- NULL
   stopifnot("fillColor" %in% noms,
             "labelTitle" %in% noms,
             "labelText" %in% noms)
@@ -66,7 +65,6 @@ grattan_leaflet <- function(DT, Year = c("2011", "2016"), simple = FALSE, na.val
                     stop("The name of DT's first column must start with SA[1-4] to indicate the geography."))
          },
          "2016" = {
-           shapefile <- 
              switch(asgs,
                     "SA1" = SA1_2016,
                     "SA2" = SA2_2016,
@@ -118,7 +116,7 @@ grattan_leaflet <- function(DT, Year = c("2011", "2016"), simple = FALSE, na.val
     addPolygons(stroke = TRUE,
                 opacity = 0.5,
                 weight = 0.75,  # the border thickness / pixels
-                color = theGrey,
+                color = na.value,
                 fillColor = shapefile@data[["fillColor"]], 
                 fillOpacity = 1,
                 label = lapply(paste0("<b>", 

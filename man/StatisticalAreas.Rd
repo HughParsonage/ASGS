@@ -10,6 +10,9 @@
 \alias{SA2_2016}
 \alias{SA3_2016}
 \alias{SA4_2016}
+\alias{SA4_2011}
+\alias{DZN_2011}
+\alias{DZN_2016}
 \title{SA2}
 \format{An object of class \code{SpatialPolygonsDataFrame} with 54772 rows and 14 columns.}
 \usage{
@@ -26,8 +29,14 @@ SA2_2016
 SA3_2016
 
 SA4_2016
+
+SA4_2011
+
+DZN_2011
+
+DZN_2016
 }
 \description{
-ESRI shape files.
+ESRI shape files for statistical areas and destination zones.
 }
 \keyword{datasets}

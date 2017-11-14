@@ -34,5 +34,7 @@ SA3_2016_simple <- geojson_read("./data-raw/mapshaper/SA3_2016_AUST.json",
 devtools::use_data(SA3_2016_simple)
 
 setwd("~/../Downloads/")
-SA3_2011_simple <- geojson_read("~/../Downloads/mapshaper/SA3_2011.json", what = "sp")
+# 30% simplification plus
+# mapshaper -o precision=0.0001 format=topojson SA3_2011_simple.json
+SA3_2011_simple <- geojson_read("~/../Downloads/mapshaper/SA3_2011_simple.json", what = "sp")
 devtools::use_data(SA3_2011_simple)
