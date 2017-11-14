@@ -95,6 +95,11 @@ CED_2016_centroids <-
 
 devtools::use_data(CED_2016_centroids)
 
+setwd("~/../Downloads/1270055003_ced_2013_aust_shp//")
+CED_2013 <- readOGR(".", layer = "CED_2013_AUST")
+setwd("~/ASGS")
+devtools::use_data(CED_2013)
+
 setwd("~/../Downloads/1270055003_poa_2016_aust_shape/")
 POA_2016 <- readOGR(".", layer = "POA_2016_AUST")
 setwd("~/ASGS")

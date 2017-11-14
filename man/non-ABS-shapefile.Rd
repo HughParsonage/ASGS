@@ -4,6 +4,7 @@
 \name{non-ABS-shapefile}
 \alias{non-ABS-shapefile}
 \alias{CED_2016}
+\alias{CED_2013}
 \alias{LGA_2016}
 \alias{POA_2016}
 \title{Non-ASGS shapefiles}
@@ -11,12 +12,15 @@
 \usage{
 CED_2016
 
+CED_2013
+
 LGA_2016
 
 POA_2016
 }
 \description{
 These are not the core Statistical Areas used by the ABS, 
-but the areas are provided for convenience.
+but the areas are provided for convenience. CED (Commonwealth Electoral Divisions), 
+LGA (Local Government Areas), POA (Postcodes).
 }
 \keyword{datasets}

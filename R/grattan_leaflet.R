@@ -1,7 +1,7 @@
 #' Draw leaflet charts in grattan style
-#' @param DT A data frame whose first column is of the form \code{SA[1-4]_(CODE|NAME)(11|16)} as a key to join with ASGS shapefiles.
+#' @param DT A data frame whose first column is of the form \code{SA[1-4]_(CODE|NAME)(11|16)} as a key to join with ASGS shapefiles, or \code{CED} for Commonwealth Electoral Divisions.
 #' Other required names are \code{fillColor}, \code{labelTitle}, and \code{labelText}.
-#' @param Year The year to which \code{DT} applies.
+#' @param Year The year to which \code{DT} applies. May be 2011 or 2016 for \code{SA[1-4]} shapefiles or 2013 or 2016 for \code{CED}.
 #' @param simple Use a simplified shapefile (if available)?
 #' @param na.value \code{fillColor} to use for unmatched polygons.
 #' @return A \code{leaflet} object; a map of Australia.
@@ -28,7 +28,7 @@
 #' @export
 
 grattan_leaflet <- function(DT,
-                            Year = c("2011", "2016"),
+                            Year = c("2011", "2013", "2016"),
                             simple = FALSE,
                             na.value = "#6A737B") {
   noms <- names(DT)
@@ -45,7 +45,8 @@ grattan_leaflet <- function(DT,
   if (grepl("NAME|CODE|MAIN", nom1, ignore.case = TRUE)) {
     CodeOrName <-  toupper(gsub("^.*(NAME|CODE|MAIN).*$", "\\1", nom1, ignore.case = TRUE))
   } else {
-    stop("The name of DT's first column must contain 'NAME', 'MAIN', or 'CODE' to indicate how the join is to be performed.")
+    stop("The name of DT's first column must contain 'NAME', 'MAIN', or 'CODE' ", 
+         "to indicate how the join is to be performed.")
   }
   Year <- match.arg(Year)
   YearInNom <- as.integer(gsub("^.*(.{2})$", "\\1", nom1)) + 2000
@@ -64,13 +65,21 @@ grattan_leaflet <- function(DT,
                     "SA4" = SA4_2011,
                     stop("The name of DT's first column must start with SA[1-4] to indicate the geography."))
          },
+         "2013" = {
+           shapefile <-
+             switch(asgs, 
+                    "CED" = CED_2013, 
+                    stop("Only CED may be used in 2013."))
+         },
          "2016" = {
              switch(asgs,
                     "SA1" = SA1_2016,
                     "SA2" = SA2_2016,
                     "SA3" = SA3_2016,
                     "SA4" = SA4_2016,
-                    stop("The name of DT's first column must start with SA[1-4] to indicate the geography."))
+                    "CED" = CED_2016,
+                    stop("The name of DT's first column must start with SA[1-4] to indicate the geography, ",
+                         "or CED (for Commonwealth Electoral Divisions)."))
          })
   
   data_slot <- setDT(slot(shapefile, "data"))
@@ -99,13 +108,18 @@ grattan_leaflet <- function(DT,
                         "SA3" = SA3_2011_simple,
                         "SA4" = shapefile)
              },
+             "2013" = {
+               switch(asgs, 
+                      "CED" = shapefile)
+             },
              "2016" = {
                shapefile <- 
                  switch(asgs,
                         "SA1" = SA1_2016_simple,
                         "SA2" = SA2_2016_simple,
                         "SA3" = shapefile,
-                        "SA4" = shapefile)
+                        "SA4" = shapefile,  
+                        "CED" = shapefile)
              })
     } else {
       shapefile

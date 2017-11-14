@@ -4,14 +4,14 @@
 \alias{grattan_leaflet}
 \title{Draw leaflet charts in grattan style}
 \usage{
-grattan_leaflet(DT, Year = c("2011", "2016"), simple = FALSE,
+grattan_leaflet(DT, Year = c("2011", "2013", "2016"), simple = FALSE,
   na.value = "#6A737B")
 }
 \arguments{
-\item{DT}{A data frame whose first column is of the form \code{SA[1-4]_(CODE|NAME)(11|16)} as a key to join with ASGS shapefiles.
+\item{DT}{A data frame whose first column is of the form \code{SA[1-4]_(CODE|NAME)(11|16)} as a key to join with ASGS shapefiles, or \code{CED} for Commonwealth Electoral Divisions.
 Other required names are \code{fillColor}, \code{labelTitle}, and \code{labelText}.}
 
-\item{Year}{The year to which \code{DT} applies.}
+\item{Year}{The year to which \code{DT} applies. May be 2011 or 2016 for \code{SA[1-4]} shapefiles or 2013 or 2016 for \code{CED}.}
 
 \item{simple}{Use a simplified shapefile (if available)?}
 
