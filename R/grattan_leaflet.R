@@ -55,23 +55,23 @@ grattan_leaflet <- function(DT,
   }
   
   
-  switch(Year,
-         "2011" = {
-           shapefile <- 
+  
+  shapefile <-
+    switch(Year,
+           "2011" = {
              switch(asgs,
                     "SA1" = SA1_2011,
                     "SA2" = SA2_2011,
                     "SA3" = SA3_2011,
                     "SA4" = SA4_2011,
                     stop("The name of DT's first column must start with SA[1-4] to indicate the geography."))
-         },
-         "2013" = {
-           shapefile <-
+           },
+           "2013" = {
              switch(asgs, 
                     "CED" = CED_2013, 
                     stop("Only CED may be used in 2013."))
-         },
-         "2016" = {
+           },
+           "2016" = {
              switch(asgs,
                     "SA1" = SA1_2016,
                     "SA2" = SA2_2016,
@@ -80,7 +80,8 @@ grattan_leaflet <- function(DT,
                     "CED" = CED_2016,
                     stop("The name of DT's first column must start with SA[1-4] to indicate the geography, ",
                          "or CED (for Commonwealth Electoral Divisions)."))
-         })
+           }, 
+           stop("Invalid Year: must be '2011', '2013', or '2016'."))
   
   data_slot <- setDT(slot(shapefile, "data"))
   data_slot_key <- 
@@ -113,7 +114,6 @@ grattan_leaflet <- function(DT,
                       "CED" = shapefile)
              },
              "2016" = {
-               shapefile <- 
                  switch(asgs,
                         "SA1" = SA1_2016_simple,
                         "SA2" = SA2_2016_simple,
