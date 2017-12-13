@@ -14,14 +14,22 @@ latlon2SA <- function(lat,
                       lon, 
                       to = c("SA2", "SA1", "SA3", "SA4"),
                       yr = c("2016", "2011"),
-                      return = c("sp", "v"),
+                      return = c("v", "sp"),
                       NAME = TRUE) {
   # Could use NSE but can't be arsed:
   to <- match.arg(to)
   yr <- match.arg(yr)
   return <- match.arg(return)
+  stopifnot(length(to) == 1,
+            length(yr) == 1)
   
   shapefile <- get(paste0(to, "_", yr))
+  if (!is(shapefile, "SpatialPolygonsDataFrame")) {
+    stop("Attempted to retrieve `", paste0(to, "_", yr), "` internally ",
+         "but that object is not a SpatialPolygonsDataFrame. Due to ",
+         "limitations of this function, ensure that this object ", 
+         "does not exist except as the shapefile from the ASGS package.")
+  }
   points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
                               proj4string = shapefile@proj4string)
   out <- sp::over(points, shapefile)
