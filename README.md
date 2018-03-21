@@ -3,7 +3,7 @@ An R package to store ABS geographic data structures
 
 ## Installation
 
-**Don't install this repo**. GitHub is not suitable for such large data packages. To obtains this package, use the foyer:
+**Don't install this repo**. GitHub is not suitable for such large data packages. To obtain this package, use the foyer:
 
 ```r
 install.packages("ASGS.foyer")
