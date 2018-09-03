@@ -8,7 +8,6 @@
 \alias{SA1_2011_simple}
 \alias{SA2_2011_simple}
 \alias{SA2_2016_simple}
-\alias{SA3_2016_simple}
 \title{Simplified shapefiles}
 \format{An object of class \code{SpatialPolygonsDataFrame} with 333 rows and 10 columns.}
 \usage{

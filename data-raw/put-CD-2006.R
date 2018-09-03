@@ -20,6 +20,16 @@ for (state in states) {
   assign(paste0("cd06", state, "_centroid"),
          cbind(as.data.table(polygon@data), 
                as.data.table(as.data.frame(gCentroid(polygon, byid = TRUE)))))
+  
+  sla_centroids <- 
+    rbindlist(lapply(lapply(lapply(split(polygon,
+                                         f = polygon@data$SLA_NAME06),
+                                   gCentroid),
+                            as.data.table),
+                     identity),
+              idcol = "id")
+  
+  assign(paste0("sla06", state, "_centroid"), sla_centroids)
 }
 
 all_cds <- lapply(paste0("cd06", states), get)
@@ -42,4 +52,20 @@ use_data(cd06act_centroid)
 use_data(cd06tas_centroid)
 use_data(cd06nt_centroid)
 use_data(cd06ot_centroid)
+
+devtools::use_data(sla06act_centroid,
+                   sla06nsw_centroid,
+                   sla06nt_centroid,
+                   sla06ot_centroid,
+                   sla06qld_centroid,
+                   sla06sa_centroid,
+                   sla06tas_centroid,
+                   sla06vic_centroid,
+                   sla06wa_centroid)
+
+
+
+
+
+
 

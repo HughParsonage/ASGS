@@ -5,7 +5,7 @@
 \title{Decode coordinates to Statistical Areas}
 \usage{
 latlon2SA(lat, lon, to = c("SA2", "SA1", "SA3", "SA4"), yr = c("2016",
-  "2011"), return = c("sp", "v"), NAME = TRUE)
+  "2011"), return = c("v", "sp"), NAME = TRUE)
 }
 \arguments{
 \item{lat, lon}{The latitude and longitude of the points.}
