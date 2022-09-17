@@ -3,7 +3,7 @@ context("Lat-lon to SA")
 test_that("Returns Goulburn given the centroid", {
   out <- latlon2SA(-34.75, 149.7195, to = "SA2", yr = "2011")
   expect_equal(as.character(out$SA2_MAIN11), "101011001")
-  out <- latlon2SA(-34.75, 149.7195, to = "SA2", return = "v")
+  out <- latlon2SA(-34.75, 149.7195, to = "SA2", return = "v", yr = "2011")
   expect_equal(as.character(out), "Goulburn")
 })
 
@@ -15,5 +15,13 @@ test_that("Returns multiply", {
                     return = "v")
   expect_equal(as.character(outv),  c("Parramatta", "Yarra"))
   
+})
+
+test_that("Returns correct close to boundary", {
+  # From Slack with DM
+  out <- latlon2SA(-37.7537, 144.9507, to = "SA2", yr = "2016", return. = "v")
+  expect_equal(as.character(out), "Coburg")
+  out <- latlon2SA(-37.7552, 144.9494, to = "SA2", yr = "2016", return. = "v", crs = 4202)
+  expect_equal(as.character(out), "Coburg")
 })
 

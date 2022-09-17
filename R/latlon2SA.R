@@ -10,41 +10,42 @@
 #' @export
 
 
-latlon2SA <- function(lat,
-                      lon, 
-                      to = c("SA2", "SA1", "SA3", "SA4"),
-                      yr = c("2016", "2011"),
-                      return = c("v", "sp"),
-                      NAME = TRUE) {
-  # Could use NSE but can't be arsed:
+latlon2SA <- function(lat, lon,
+                      to = c("SA2", "SA1", "SA3", "SA4", "POA"),
+                      yr = "2021",
+                      return. = c("sf", "v"),
+                      NAME = TRUE,
+                      crs = NULL) {
   to <- match.arg(to)
-  yr <- match.arg(yr)
-  return <- match.arg(return)
-  stopifnot(length(to) == 1,
-            length(yr) == 1)
+  return. <- match.arg(return.)
+  stopifnot(length(lat) == length(lon),
+            is.numeric(lat),
+            is.numeric(lon))
   
-  shapefile <- get(paste0(to, "_", yr))
-  if (!is(shapefile, "SpatialPolygonsDataFrame")) {
-    stop("Attempted to retrieve `", paste0(to, "_", yr), "` internally ",
-         "but that object is not a SpatialPolygonsDataFrame. Due to ",
-         "limitations of this function, ensure that this object ", 
-         "does not exist except as the shapefile from the ASGS package.")
+  # This package's object for the given area
+  sa_ <- GET(paste0(to, "_", yr))
+  crs_null <- is.null(crs)
+  if (crs_null) {
+    crs <- sf::st_crs(sa_)
   }
-  points <- sp::SpatialPoints(coords = sp::coordinates(data.frame(x = lon, y = lat)),
-                              proj4string = shapefile@proj4string)
-  out <- sp::over(points, shapefile)
-
-  if (return == "v") {
-    if (NAME && to != "SA1") {
-      suffix <- paste0("NAME", substr(yr, 3, 4))
-      v_name <- paste0(to, "_", suffix)
-    } else {
-      suffix <- names(out)[grepl(to, names(out)) & !grepl("NAME", names(out))]
-      v_name <- suffix[1]
-    }
-    out <- out[[v_name]]
+  pts <- data.frame(lat, lon)
+  coo <- sf::st_as_sf(pts, coords = c("lon", "lat"), crs = crs)
+  # Transform the coordinates (as likely to be small i.e. faster relative to the shapefile)
+  if (!crs_null) {
+    coo <- sf::st_transform(coo, sf::st_crs(sa_))
   }
-  out
+  out <- sf::st_join(coo, sa_)
+  if (return. == "sf") {
+    return(out)
+  }
+  # nom is the name of the column from the sf so created
+  # containing the vector requested
+  nom <- paste0(to, if (NAME) "_NAME" else "_CODE", substr(as.character(yr), 3, 4))
+  if (!hasName(out, nom)) {
+    warning("Column ", nom, " not found in sf object so returning the sf object.")
+    return(out)
+  }
+  .subset2(out, nom)
 }
 
 
