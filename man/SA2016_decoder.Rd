@@ -4,7 +4,9 @@
 \name{SA2016_decoder}
 \alias{SA2016_decoder}
 \title{Decode statistical areas}
-\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 2292 rows and 13 columns.}
+\format{
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2292 rows and 13 columns.
+}
 \usage{
 SA2016_decoder
 }

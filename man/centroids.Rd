@@ -29,7 +29,57 @@
 \alias{sla06vic_centroid}
 \alias{sla06wa_centroid}
 \title{Centroids}
-\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 150 rows and 3 columns.}
+\format{
+An object of class \code{data.table} (inherits from \code{data.frame}) with 150 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 545 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2668 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 54772 rows and 4 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 57490 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2196 rows and 4 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2196 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 547 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 11966 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 510 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 15 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 7672 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 3246 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 1068 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 9310 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 4370 rows and 8 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 109 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 200 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 96 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 4 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 478 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 128 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 44 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 210 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 156 rows and 3 columns.
+}
 \usage{
 CED_2016_centroids
 

@@ -54,95 +54,35 @@ grattan_leaflet <- function(DT,
     warning("Using Year = ", Year, ", but DT's first column is ", nom1, ".")
   }
   
+  shapefile <- GET(paste0(asgs, "_", Year, if (simple) "_simple"))
   
+  the_key <- paste0(asgs, "_", CodeOrName, substr(Year, 3, 4))
   
-  shapefile <-
-    switch(Year,
-           "2011" = {
-             switch(asgs,
-                    "SA1" = SA1_2011,
-                    "SA2" = SA2_2011,
-                    "SA3" = SA3_2011,
-                    "SA4" = SA4_2011,
-                    stop("The name of DT's first column must start with SA[1-4] to indicate the geography."))
-           },
-           "2013" = {
-             switch(asgs, 
-                    "CED" = CED_2013, 
-                    stop("Only CED may be used in 2013."))
-           },
-           "2016" = {
-             switch(asgs,
-                    "SA1" = SA1_2016,
-                    "SA2" = SA2_2016,
-                    "SA3" = SA3_2016,
-                    "SA4" = SA4_2016,
-                    "CED" = CED_2016,
-                    stop("The name of DT's first column must start with SA[1-4] to indicate the geography, ",
-                         "or CED (for Commonwealth Electoral Divisions)."))
-           }, 
-           stop("Invalid Year: must be '2011', '2013', or '2016'."))
+  if (nrow(shapefile) != nrow(DT)) {
+    cat(nrow(shapefile), "\t", nrow(DT), "\n")
+    setDT(DT)
+    DT <- DT[list(.subset2(shapefile, the_key)), on = c(the_key)]
+  }
   
-  data_slot <- setDT(slot(shapefile, "data"))
-  data_slot_key <- 
-    grep(paste0(asgs, ".*", CodeOrName), names(data_slot), value = TRUE)[1]
+  shapefile <- merge(shapefile, DT, by = the_key, all = TRUE)
   
-  slot(shapefile, "data") <- 
-    DT[data_slot, on = paste0(nom1, "==", data_slot_key)] %>%
-    # merge(data_slot, 
-    #       DT,
-    #       by.x = data_slot_key,
-    #       by.y = nom1, 
-    #       all.x = TRUE) %>%
-    # as.data.table %>%
-    setorderv(grep(paste0(asgs, ".*", "MAIN|CODE"), names(.), value = TRUE)[1]) %>%
-    .[is.na(fillColor), fillColor := na.value] %>%
-    .[]
-  
-  drawn_shapefile <- 
-    if (simple) {
-      switch(Year,
-             "2011" = {
-                 switch(asgs,
-                        "SA1" = SA1_2011_simple,
-                        "SA2" = SA2_2011_simple,
-                        "SA3" = SA3_2011_simple,
-                        "SA4" = shapefile)
-             },
-             "2013" = {
-               switch(asgs, 
-                      "CED" = shapefile)
-             },
-             "2016" = {
-                 switch(asgs,
-                        "SA1" = SA1_2016_simple,
-                        "SA2" = SA2_2016_simple,
-                        "SA3" = shapefile,
-                        "SA4" = shapefile,  
-                        "CED" = shapefile)
-             })
-    } else {
-      shapefile
-    }
-  
-  drawn_shapefile %>%
-    leaflet %>%
+  leaflet(shapefile) %>%
     addPolygons(stroke = TRUE,
                 opacity = 0.5,
                 weight = 0.75,  # the border thickness / pixels
                 color = na.value,
-                fillColor = shapefile@data[["fillColor"]], 
+                fillColor = shapefile[["fillColor"]], 
                 fillOpacity = 1,
-                label = lapply(paste0("<b>", 
-                                      shapefile@data[["labelTitle"]], ":",
+                label = lapply(paste0("<b>",
+                                      shapefile[["labelTitle"]], ":",
                                       "</b><br>",
-                                      shapefile@data[["labelText"]]),
-                               HTML),
-                highlightOptions = leaflet::highlightOptions(weight = 2,
-                                                             color = "white",
-                                                             opacity = 1,
-                                                             dashArray = "",
-                                                             bringToFront = TRUE))
+                                      shapefile[["labelText"]]),
+                               HTML))
+                # highlightOptions = leaflet::highlightOptions(weight = 2,
+                #                                              color = "white",
+                #                                              opacity = 1,
+                #                                              dashArray = "",
+                #                                              bringToFront = TRUE))
 }
 
 

@@ -1,4 +1,4 @@
-#' Smooth a shapfile by nearest neighbourhood
+#' Smooth a shapefile by nearest neighbourhood
 #' @description Given a shapefile and a \code{data.frame} with a value for each polygon,
 #' return a smoothed value of the values.
 #' @param shapefile A shapefile (as from this package) containing an \code{as.data.frame} method.
@@ -29,9 +29,9 @@ smooth_shapefile <- function(shapefile, data_by_id, id, var2smooth, k = 10, coal
   x <- 
     shapefile_df %>%
     merge(data_by_id, by = id, all.x = TRUE, sort = FALSE) %>%
-    .[[var2smooth]]
+    .subset2(var2smooth)
   
-  spdep::localG(x = as.numeric(dplyr::coalesce(x, coalesce.to)),
+  spdep::localG(x = as.numeric(fcoalesce(x, coalesce.to)),
                 listw = spdep::nb2listw(knn50, style = "B"),
                 zero.policy = TRUE)
 }

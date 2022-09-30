@@ -22,7 +22,7 @@ library(ASGS)
 
 
 ```{r summarize-data}
-SA2_2011_decoder <- SA2_2011@data %>% as.data.table
+SA2_2011_decoder <- SA2_2011_simple() %>% as.data.table
 
 Repayment_stress_by_SA2_2011 <- 
   fread("https://raw.githubusercontent.com/HughParsonage/ABS-data/master/Mortgage-payment-stress-2011.csv", na.strings = "--") %>% 
@@ -34,7 +34,8 @@ Repayment_stress_by_SA2_2011 <-
   .[, .(SA2_MAIN11, Prop_geq_30pc)] %>%
   .[, Prop_geq_30pc := as.numeric(Prop_geq_30pc)] %>%
   .[, SA2_MAIN11 := as.character(SA2_MAIN11)] %>%
-  .[SA2_2011_decoder, on = "SA2_MAIN11"]
+  .[SA2_2011_decoder, on = "SA2_MAIN11"] %>%
+  drop_col("geometry")
 
 pal_v <- colorNumeric(palette = grattanCharts::gpal(7, reverse = TRUE),
                       domain = range(Repayment_stress_by_SA2_2011$Prop_geq_30pc, na.rm = TRUE))
@@ -47,7 +48,7 @@ Repayment_stress_by_SA2_2011[, labelText := paste0(Prop_geq_30pc, "%")]
 ```
 
 ```{r draw-leaflet-chart, fig.width=11, fig.height=11}
-grattan_leaflet(Repayment_stress_by_SA2_2011, "2011") %>%
+grattan_leaflet(Repayment_stress_by_SA2_2011, "2011", simple = TRUE) %>%
   addLegend(pal = pal_v,
             opacity = 1,
             values = ~unique(Repayment_stress_by_SA2_2011$Prop_geq_30pc),

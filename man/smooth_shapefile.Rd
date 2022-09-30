@@ -2,10 +2,16 @@
 % Please edit documentation in R/smooth_shapefile.R
 \name{smooth_shapefile}
 \alias{smooth_shapefile}
-\title{Smooth a shapfile by nearest neighbourhood}
+\title{Smooth a shapefile by nearest neighbourhood}
 \usage{
-smooth_shapefile(shapefile, data_by_id, id, var2smooth, k = 10,
-  coalesce.to = 0)
+smooth_shapefile(
+  shapefile,
+  data_by_id,
+  id,
+  var2smooth,
+  k = 10,
+  coalesce.to = 0
+)
 }
 \arguments{
 \item{shapefile}{A shapefile (as from this package) containing an \code{as.data.frame} method.}

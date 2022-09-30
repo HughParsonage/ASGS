@@ -3,3 +3,8 @@
     options("ASGS.env" = new.env(parent = emptyenv()))
   }
 }
+
+.onUnload <- function(libpath) {
+  options("ASGS.env" = NULL)
+}
+

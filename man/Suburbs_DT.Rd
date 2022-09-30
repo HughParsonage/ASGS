@@ -4,7 +4,8 @@
 \name{Suburbs_DT}
 \alias{Suburbs_DT}
 \title{Boundaries of Australian suburbs}
-\format{A \code{data.table} of 13,121,341 rows and 11 columns.
+\format{
+A \code{data.table} of 13,121,341 rows and 11 columns.
 \describe{
 \item{LOC_PID}{The internal locality identifier used in the ASGS.}
 \item{NAME}{The ordinary name of the locality.}
@@ -13,7 +14,8 @@
 \item{lat}{The latitude of the vertex.}
 \item{order}{The order the vertices of the polygon are to be drawn.}
 \item{hole}{Does the polygon contain a hole.}
-}}
+}
+}
 \usage{
 Suburbs_DT
 }

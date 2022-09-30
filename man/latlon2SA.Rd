@@ -4,8 +4,15 @@
 \alias{latlon2SA}
 \title{Decode coordinates to Statistical Areas}
 \usage{
-latlon2SA(lat, lon, to = c("SA2", "SA1", "SA3", "SA4"), yr = c("2016",
-  "2011"), return = c("v", "sp"), NAME = TRUE)
+latlon2SA(
+  lat,
+  lon,
+  to = c("SA2", "SA1", "SA3", "SA4", "POA"),
+  yr = "2021",
+  return. = c("sf", "v"),
+  NAME = TRUE,
+  crs = NULL
+)
 }
 \arguments{
 \item{lat, lon}{The latitude and longitude of the points.}
@@ -14,13 +21,18 @@ latlon2SA(lat, lon, to = c("SA2", "SA1", "SA3", "SA4"), yr = c("2016",
 
 \item{yr}{The year of the statistical area series.}
 
-\item{return}{Return the spatial data frame (\code{sp}) or a vector (\code{v}) of the ?}
+\item{return.}{Return the spatial data frame (\code{sp}) or a vector (\code{v}) of the ?}
 
 \item{NAME}{If \code{TRUE} and return is \code{v}, the default, the \code{NAME} is returned; otherwise, the \code{MAIN} or \code{CODE} is returned.
 If \code{to = SA1} then, as \code{NAME} is not available, the \code{MAIN} is returned without a warning.}
+
+\item{crs}{An integer, the coordinate reference system argument passed to 
+\code{sf::st_as_sf}. If \code{NULL}, the default, the CRS is assumed to be the same
+as the spatial features object requested (e.g. `SA2_2021()` under the default 
+arguments).}
 }
 \value{
-A vector of the SAs mapped.
+A vector or spatial feature object of the SAs mapped.
 }
 \description{
 Decode coordinates to Statistical Areas

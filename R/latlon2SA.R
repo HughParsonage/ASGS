@@ -3,10 +3,14 @@
 #' @param lat,lon The latitude and longitude of the points.
 #' @param to Which statistical areas (by default SA2) to map to.
 #' @param yr The year of the statistical area series.
-#' @param return Return the spatial data frame (\code{sp}) or a vector (\code{v}) of the ?
+#' @param return. Return the spatial data frame (\code{sp}) or a vector (\code{v}) of the ?
 #' @param NAME If \code{TRUE} and return is \code{v}, the default, the \code{NAME} is returned; otherwise, the \code{MAIN} or \code{CODE} is returned.
 #' If \code{to = SA1} then, as \code{NAME} is not available, the \code{MAIN} is returned without a warning.
-#' @return A vector of the SAs mapped.
+#' @param crs An integer, the coordinate reference system argument passed to 
+#' \code{sf::st_as_sf}. If \code{NULL}, the default, the CRS is assumed to be the same
+#' as the spatial features object requested (e.g. `SA2_2021()` under the default 
+#' arguments).
+#' @return A vector or spatial feature object of the SAs mapped.
 #' @export
 
 

@@ -9,17 +9,19 @@
 \alias{SA2_2011_simple}
 \alias{SA2_2016_simple}
 \title{Simplified shapefiles}
-\format{An object of class \code{SpatialPolygonsDataFrame} with 333 rows and 10 columns.}
+\format{
+An object of class \code{function} of length 1.
+}
 \usage{
-SA3_2011_simple
+SA3_2011_simple()
 
-SA3_2016_simple
+SA3_2016_simple()
 
-SA1_2011_simple
+SA1_2011_simple()
 
-SA2_2011_simple
+SA2_2011_simple()
 
-SA2_2016_simple
+SA2_2016_simple()
 
 SA3_2016_simple
 }
