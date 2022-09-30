@@ -4,20 +4,21 @@ Version: 2021.0
 Authors@R: person("Hugh", "Parsonage", email = "hugh.parsonage+ASGS@gmail.com", role = c("aut", "cre"))
 Description: Provides statistical geography files, including simplified and quantized shapefiles suitable for interactive maps.
 Depends:
-  R (>= 2.10),
-  data.table
+  R (>= 4.0)
 Imports:
   sp,
+  data.table,
   sf,
   spdep,
   dplyr,
   leaflet,
   htmltools,
   magrittr,
-  methods
+  qs
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 RoxygenNote: 7.2.0
 Suggests: testthat,
     knitr,
