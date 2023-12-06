@@ -16,6 +16,7 @@
 \alias{SA2_2021}
 \alias{SA3_2021}
 \alias{SA4_2021}
+\alias{MB_2021}
 \title{SA2}
 \usage{
 SA1_2011()
@@ -45,6 +46,8 @@ SA2_2021()
 SA3_2021()
 
 SA4_2021()
+
+MB_2021()
 }
 \description{
 \code{sf} objects for statistical areas

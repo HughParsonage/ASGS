@@ -60,3 +60,7 @@ NULL
 #' @rdname StatisticalAreas
 #' @export
 "SA4_2021" <- function() GET("SA4_2021")
+
+#' @rdname StatisticalAreas
+#' @export
+"MB_2021" <- function() GET("MB_2021")
